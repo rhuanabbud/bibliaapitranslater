@@ -10,18 +10,22 @@ import java.util.List;
 public class Livro {
 
     @Id
+    @Column(name = "id_livro")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idLivro;
 
     @Column(nullable = false)
-    private String name;
+    private String nome;
 
     @Column(nullable = false)
-    private String abbreviation;
+    private String abreviatura;
 
     @Column(nullable = false)
-    private String testament;
+    private String testamento;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "numero_livro", nullable = false)
+    private int numeroLivro;
+
+    @OneToMany(mappedBy = "livro", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Capitulo> capitulos;
 }

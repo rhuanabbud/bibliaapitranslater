@@ -10,16 +10,17 @@ import java.util.List;
 public class Capitulo {
 
     @Id
+    @Column(name = "id_capitulo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idCapitulo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", nullable = false)
+    @JoinColumn(name = "id_livro", nullable = false)
     private Livro livro;
 
-    @Column(nullable = false)
-    private int number;
+    @Column(name = "numero_capitulo", nullable = false)
+    private int numeroCapitulo;
 
-    @OneToMany(mappedBy = "chapter", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Versiculo> vers;
+    @OneToMany(mappedBy = "versiculo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Versiculo> versiculos;
 }

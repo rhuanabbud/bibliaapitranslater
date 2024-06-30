@@ -8,16 +8,17 @@ import lombok.Data;
 public class Versiculo {
 
     @Id
+    @Column(name = "id_versiculo")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idVersiculo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chapter_id", nullable = false)
+    @JoinColumn(name = "id_capitulo", nullable = false)
     private Capitulo capitulo;
 
-    @Column(nullable = false)
-    private int number;
+    @Column(name = "numero_versiculo", nullable = false)
+    private int numeroVersiculo;
 
     @Column(nullable = false, columnDefinition = "TEXT")
-    private String text;
+    private String versiculo;
 }
