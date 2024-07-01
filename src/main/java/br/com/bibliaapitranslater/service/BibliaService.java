@@ -1,7 +1,7 @@
 package br.com.bibliaapitranslater.service;
 
-import br.com.bibliaapitranslater.model.Biblia;
-import br.com.bibliaapitranslater.repository.BibliaRepository;
+import br.com.bibliaapitranslater.DTO.BibliaDTO;
+import br.com.bibliaapitranslater.repository.QuerysBiblia;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +14,15 @@ public class BibliaService {
 
     private static final Logger logger = LoggerFactory.getLogger(BibliaService.class);
 
-    private final BibliaRepository bibliaRepository;
+    private final QuerysBiblia jpql;
 
     @Autowired
-    public BibliaService(BibliaRepository bibliaRepository) {
-        this.bibliaRepository = bibliaRepository;
+    public BibliaService(QuerysBiblia jpql) {
+        this.jpql = jpql;
     }
 
-    public List<Biblia> findFullBook(Long id) {
+    public List<BibliaDTO> findFullBook(Long id) {
         logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaService - findFullBook");
-        return bibliaRepository.findFullBook(id);
+        return jpql.consultaPeloIdLivro(id);
     }
 }

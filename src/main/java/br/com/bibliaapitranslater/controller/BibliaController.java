@@ -1,6 +1,6 @@
 package br.com.bibliaapitranslater.controller;
 
-import br.com.bibliaapitranslater.model.Biblia;
+import br.com.bibliaapitranslater.DTO.BibliaDTO;
 import br.com.bibliaapitranslater.service.BibliaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class BibliaController {
     }
 
     @GetMapping("/{id}")
-    public List<Biblia> getFullBook(@PathVariable Long id) {
+    public List<BibliaDTO> getFullBook(@PathVariable Long id) {
         logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaController - getFullBook");
         return bibliaService.findFullBook(id);
     }
