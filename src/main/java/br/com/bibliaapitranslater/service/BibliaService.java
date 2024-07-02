@@ -1,6 +1,7 @@
 package br.com.bibliaapitranslater.service;
 
 import br.com.bibliaapitranslater.DTO.BibliaDTO;
+import br.com.bibliaapitranslater.model.Biblia;
 import br.com.bibliaapitranslater.repository.QuerysBiblia;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,9 @@ public class BibliaService {
     }
 
     public List<BibliaDTO> findFullBook(Long id) {
-        logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaService - findFullBook");
-        return jpql.consultaPeloIdLivro(id);
+        logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaService - findFullBook - id = {}", id);
+        List<Biblia> livro = jpql.findBookById(id);
+        BibliaDTO dto = new BibliaDTO();
+        return dto.convertPtBrToDtoList(livro);
     }
 }

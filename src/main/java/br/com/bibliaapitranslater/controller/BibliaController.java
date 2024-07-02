@@ -27,7 +27,7 @@ public class BibliaController {
 
     @GetMapping("/{id}")
     public List<BibliaDTO> getFullBook(@PathVariable Long id) {
-        logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaController - getFullBook");
+        logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaController - getFullBook - id = {}", id);
         return bibliaService.findFullBook(id);
     }
 }
