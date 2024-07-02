@@ -5,6 +5,7 @@ import br.com.bibliaapitranslater.service.BibliaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +27,15 @@ public class BibliaController {
     }
 
     @GetMapping("/{id}")
-    public List<BibliaDTO> getFullBook(@PathVariable Long id) {
+    public ResponseEntity<List<BibliaDTO>> getFullBook(@PathVariable Long id) {
         logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaController - getFullBook - id = {}", id);
-        return bibliaService.findFullBook(id);
+
+        List<BibliaDTO> lista = bibliaService.findFullBook(id);
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(lista);
+        }
     }
 }
