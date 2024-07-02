@@ -34,4 +34,22 @@ public class QuerysBiblia {
         query.setParameter("id", id);
         return (List<Biblia>) query.getResultList();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Biblia> findBookById(int numeroLivro) {
+        logger.info("Buscando um livro da biblia com todos os capitulos e versiculos QuerysBiblia - findBookById " +
+                "- numeroLivro = {}", numeroLivro);
+        String jpql =
+                "select l.id_livro idlivro, l.nome, l.abreviatura, l.testamento, l.numero_livro numerolivro, " +
+                        "c.numero_capitulo numerocapitulo, " +
+                        "v.numero_versiculo numeroversiculo, v.versiculo " +
+                        "from public.livro l " +
+                        "inner join public.capitulo c on l.id_livro = c.id_livro " +
+                        "inner join public.versiculo v on c.id_capitulo = v.id_capitulo " +
+                        "where l.numero_livro = :numeroLivro";
+
+        Query query = manager.createNativeQuery(jpql, "BibliaSelectValue");
+        query.setParameter("numeroLivro", numeroLivro);
+        return (List<Biblia>) query.getResultList();
+    }
 }

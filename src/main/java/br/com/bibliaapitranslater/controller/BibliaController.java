@@ -26,11 +26,25 @@ public class BibliaController {
         this.bibliaService = bibliaService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("getFullBookById/{id}")
     public ResponseEntity<List<BibliaDTO>> getFullBook(@PathVariable Long id) {
         logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaController - getFullBook - id = {}", id);
 
         List<BibliaDTO> lista = bibliaService.findFullBook(id);
+
+        if (lista.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(lista);
+        }
+    }
+
+    @GetMapping("getFullBookByNumero/{numeroLivro}")
+    public ResponseEntity<List<BibliaDTO>> getFullBook(@PathVariable int numeroLivro) {
+        logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaController " +
+                "- getFullBook - numeroLivro = {}", numeroLivro);
+
+        List<BibliaDTO> lista = bibliaService.findFullBook(numeroLivro);
 
         if (lista.isEmpty()) {
             return ResponseEntity.noContent().build();

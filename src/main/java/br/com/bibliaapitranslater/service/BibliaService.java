@@ -28,4 +28,13 @@ public class BibliaService {
         BibliaDTO dto = new BibliaDTO();
         return dto.convertPtBrToDtoList(livro);
     }
+
+    public List<BibliaDTO> findFullBook(int numeroLivro) {
+        logger.info("Buscando um livro da biblia com todos os capitulos e versiculos BibliaService - findFullBook " +
+                "- numeroLivro = {}", numeroLivro);
+
+        List<Biblia> livro = jpql.findBookById(numeroLivro);
+        BibliaDTO dto = new BibliaDTO();
+        return dto.convertPtBrToDtoList(livro);
+    }
 }
